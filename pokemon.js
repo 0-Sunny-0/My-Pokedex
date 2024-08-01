@@ -1,6 +1,6 @@
 const MAX_POKEMON = 151;
-const listWrapper = document.querySelector(".listWrapper");
-const searchInput = document.querySelector("#serach-input");
+const listWrapper = document.querySelector(".list-wrapper");
+const searchInput = document.querySelector("#search-input");
 const numberFilter = document.querySelector("#number");
 const nameFilter = document.querySelector("#name");
 const notFoundMessage = document.querySelector("#not-found-message");
@@ -34,17 +34,19 @@ function displayPokemons(pokemon) {
 
     pokemon.forEach((pokemon) => {
         const pokemonID = pokemon.url.split("/")[6];
+        console.log(pokemonID);
+        
         const listItem = document.createElement("div");
         listItem.className = "list-item";
         listItem.innerHTML = `
             <div class="number-wrap">
-                <p class="caption-fonts">#${pokemoneID}</p>
+                <p class="caption-fonts">#${pokemonID}</p>
             </div>
              <div class="img-wrap">
-                <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${pokemonID}.svg alt="${pokemon.name}" />
+                <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${pokemonID}.svg" alt="${pokemon.name}" />
             </div>
             <div class="name-wrap">
-                <p class="body3-fonts">#${pokemone.name}</p>
+                <p class="body3-fonts">#${pokemon.name}</p>
             </div>
         `;
 
