@@ -15,12 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadPokemon(id) {
     try {
-        const [pokemon, pokemonSpecies] = await Promise.all([fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) => {
-            res.json();
-    }),
-        fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) => {
-            res.json()
-    }),
+        const [pokemon, pokemonSpecies] = await Promise.all([
+            fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) => res.json()),
+            fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) =>
+            res.json()),
     ]);
 
         const abilitiesWrapper = document.querySelector(".pokemon-detail-wrap .pokemon-detail.move");
@@ -144,27 +142,26 @@ function createAndAppendElement(parent, tag, options = {}) {
     Object.keys(options).forEach((key) => {
         element[key] = options[key];
     });
-
     parent.appendChild(element);
-    return element
+    return element;
 }
 
 function displayPokemonDetails(pokemon) {
-    const { name, id, types, weight, height, abilities, stats} = pokemon;
+    const { name, id, types, weight, height, abilities, stats } = pokemon;
     const capitalizePokemonName = capitalizeFirstLetter(name);
 
     document.querySelector("title").textContent = capitalizePokemonName;
 
-    const detailMainElement = document.querySelector("detail-main");
-
+    const detailMainElement = document.querySelector(".detail-main");
     detailMainElement.classList.add(name.toLowerCase());
 
-    document.querySelector("name-wrap .name").textContent = capitalizeFPokemonName;
+    document.querySelector(".name-wrap .name").textContent = capitalizePokemonName;
 
     document.querySelector(".pokemon-id-wrap .body2-fonts").textContent = `#${String(id).padStart(3, "0")}`;
 
     const imageElement = document.querySelector(".detail-img-wrapper img");
-    imageElement.src = `https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/other/dream-world/${id}.svg`;
+    imageElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
+    imageElement.alt = name;
 
     const typeWrapper = document.querySelector(".power-wrapper");
     typeWrapper.innerHTML = "";
@@ -188,7 +185,7 @@ function displayPokemonDetails(pokemon) {
         });
     });
 
-    const statsWrapper = document.querySelector("stats-wrapper");
+    const statsWrapper = document.querySelector(".stats-wrapper");
     statsWrapper.innerHTML = "";
 
     const statNameMapping = {
@@ -233,5 +230,5 @@ function getEnglishFlavorText(pokemonSpecies) {
             return flavor;
         }
     }
+    return "";
 }
-return "";
